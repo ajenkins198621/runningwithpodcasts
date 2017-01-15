@@ -1,1 +1,1 @@
-<h1>Unpublished profile</h1>
+<h1>Unpublished content</h1>

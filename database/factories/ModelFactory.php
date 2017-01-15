@@ -24,6 +24,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 
+// Profile
 $factory->define(App\Profile::class, function (Faker\Generator $faker) {
     return [
         "user_id" => 1,
@@ -33,14 +34,34 @@ $factory->define(App\Profile::class, function (Faker\Generator $faker) {
         "biography" => "I love running around Jersey City and Hoboken.",
     ];
 });
-
 $factory->state(App\Profile::class, 'public', function ($faker) {
     return [
         "public" => 1,
     ];
 });
-
 $factory->state(App\Profile::class, 'unpublished', function ($faker) {
+    return [
+        "public" => 0,
+    ];
+});
+
+// Runs
+$factory->define(App\Runs::class, function (Faker\Generator $faker) {
+    return [
+        "user_id" => 1,
+        "public" => 1,
+        "distance" => 500,
+        "distance_unit" => 1,
+        "duration" => 2400,
+        "location" => "Jersey City"
+    ];
+});
+$factory->state(App\Runs::class, 'public', function ($faker) {
+    return [
+        "public" => 1,
+    ];
+});
+$factory->state(App\Runs::class, 'unpublished', function ($faker) {
     return [
         "public" => 0,
     ];

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PublicProfileTest extends TestCase
+class ViewPublicProfileTest extends TestCase
 {
 
     use DatabaseMigrations;
@@ -14,9 +14,7 @@ class PublicProfileTest extends TestCase
     /** @test */
     public function user_can_view_public_profile()
     {
-        $profile = factory(Profile::class)->create([
-            "public" => 1
-        ]);
+        $profile = factory(Profile::class)->states("public")->create();
 
         $this->visit("/profile/".$profile->username);
 
@@ -28,13 +26,11 @@ class PublicProfileTest extends TestCase
     /** @test */
     public function user_cannot_view_nonpublic_profile()
     {
-        $profile = factory(Profile::class)->create([
-            "public" => 0
-        ]);
+        $profile = factory(Profile::class)->states("unpublished")->create();
 
         $this->visit("/profile/".$profile->username);
 
-        $this->see("Unpublished profile");
+        $this->see("Unpublished content");
     }
 
     /** @test */
