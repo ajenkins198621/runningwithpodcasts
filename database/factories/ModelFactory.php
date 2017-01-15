@@ -27,10 +27,22 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Profile::class, function (Faker\Generator $faker) {
     return [
         "user_id" => 1,
-        "public" => 1,
         "first_name" => "Austin",
         "last_name" => "Jenkins",
         "username" => "austin_jenkins",
         "biography" => "I love running around Jersey City and Hoboken.",
     ];
 });
+
+$factory->state(App\Profile::class, 'public', function ($faker) {
+    return [
+        "public" => 1,
+    ];
+});
+
+$factory->state(App\Profile::class, 'unpublished', function ($faker) {
+    return [
+        "public" => 0,
+    ];
+});
+
