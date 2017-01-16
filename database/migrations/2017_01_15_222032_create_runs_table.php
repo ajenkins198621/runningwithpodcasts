@@ -21,6 +21,7 @@ class CreateRunsTable extends Migration
             $table->integer('distance_units_id');
             $table->integer('duration');
             $table->string('location');
+            $table->dateTime('date');
             $table->timestamps();
             $table->softDeletes();
         });

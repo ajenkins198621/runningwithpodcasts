@@ -53,7 +53,8 @@ $factory->define(App\Runs::class, function (Faker\Generator $faker) {
         "distance" => 500,
         "distance_units_id" => 1,
         "duration" => 2400,
-        "location" => "Jersey City"
+        "location" => "Jersey City",
+        "date" => "2017-01-16 12:00:00",
     ];
 });
 $factory->state(App\Runs::class, 'public', function ($faker) {

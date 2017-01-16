@@ -18,4 +18,5 @@ class CreateUserTest extends TestCase
         $users = User::get();
         $this->assertTrue($users->contains($user));
     }
+
 }

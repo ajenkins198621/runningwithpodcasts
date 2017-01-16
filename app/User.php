@@ -39,4 +39,17 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function createRun($distance, $distance_units_id, $duration, $location = "", $date = null)
+    {
+        $date = !$date ? date("Y-m-d H:i:s") : $date;
+        $run = $this->runs()->create([
+            'distance' => $distance,
+            'distance_units_id' => $distance_units_id,
+            'duration' => $duration,
+            'location' => $location,
+            'date' => $date
+        ]);
+        return $run;
+    }
 }

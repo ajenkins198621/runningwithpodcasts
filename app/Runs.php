@@ -47,5 +47,4 @@ class Runs extends Model
     {
         return $this->belongsTo(DistanceUnits::class);
     }
-
 }

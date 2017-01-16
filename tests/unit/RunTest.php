@@ -27,4 +27,17 @@ class RunTest extends TestCase
         $this->assertEquals("40:00", $run->duration_in_text);
     }
 
+    /** @test */
+    public function store_function_can_be_posted_to()
+    {
+        $this->json("POST","/runs/create",[
+            "user_id" => 1,
+            "distance" => 400,
+            "distance_units_id" => 1,
+            "duration" => 2400,
+            "location" => "Hoboken",
+            "date" => "2017-01-16 12:00:00"
+        ]);
+        $this->assertResponseOk();
+    }
 }
