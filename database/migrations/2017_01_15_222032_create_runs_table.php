@@ -18,7 +18,7 @@ class CreateRunsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->integer('public')->default(1);
             $table->integer('distance');
-            $table->integer('distance_unit');
+            $table->integer('distance_units_id');
             $table->integer('duration');
             $table->string('location');
             $table->timestamps();

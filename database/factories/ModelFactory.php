@@ -51,7 +51,7 @@ $factory->define(App\Runs::class, function (Faker\Generator $faker) {
         "user_id" => 1,
         "public" => 1,
         "distance" => 500,
-        "distance_unit" => 1,
+        "distance_units_id" => 1,
         "duration" => 2400,
         "location" => "Jersey City"
     ];

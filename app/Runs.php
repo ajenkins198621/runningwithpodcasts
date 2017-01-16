@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\DistanceUnits;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -34,6 +36,16 @@ class Runs extends Model
             return "i:s";
         }
         return "H:i:s";
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
+    public function distance_units()
+    {
+        return $this->belongsTo('App\DistanceUnits','distance_units_id');
     }
 
 }

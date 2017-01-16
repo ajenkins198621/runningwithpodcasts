@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DistanceUnits;
 use App\Runs;
 
 use Illuminate\Http\Request;

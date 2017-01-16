@@ -17,7 +17,7 @@ class ViewRunTest extends TestCase
         $run = factory(Runs::class)->states("public")->create();
         $this->visit("/runs/".$run->id);
 
-        $this->see("5.00");
+        $this->see("5.00 miles");
         $this->see("40:00");
         $this->see("Jersey City");
     }
