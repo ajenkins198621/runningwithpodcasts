@@ -40,12 +40,12 @@ class Runs extends Model
 
     public function user()
     {
-        return $this->belongsTo('User');
+        return $this->belongsTo(User::class);
     }
 
     public function distance_units()
     {
-        return $this->belongsTo('App\DistanceUnits','distance_units_id');
+        return $this->belongsTo(DistanceUnits::class);
     }
 
 }

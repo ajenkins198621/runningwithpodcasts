@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Runs;
+use App\Profile;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -32,5 +33,10 @@ class User extends Authenticatable
     public function runs()
     {
         return $this->hasMany(Runs::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }
