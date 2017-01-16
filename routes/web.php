@@ -19,3 +19,6 @@ Route::get('/profile/{username}', "ProfileController@show");
 
 Route::get('/runs/{id}',"RunsController@show");
 Route::post('/runs/create',"RunsController@store");
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
