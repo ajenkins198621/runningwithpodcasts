@@ -19,4 +19,9 @@ class CreateUserTest extends TestCase
         $this->assertTrue($users->contains($user));
     }
 
+    public function user_can_see_form()
+    {
+
+    }
+
 }

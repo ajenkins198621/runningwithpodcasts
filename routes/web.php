@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,6 +21,13 @@ Route::get('/profile/{username}', "ProfileController@show");
 
 Route::get('/runs/{id}',"RunsController@show");
 Route::post('/runs/create',"RunsController@store");
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
