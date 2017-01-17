@@ -33,7 +33,7 @@ class CreateRunTest extends TestCase
     public function run_can_be_created_through_post_request()
     {
         $user = factory(User::class)->create();
-
+        $this->actingAs($user);
         $this->json("POST","/runs/create",[
             "user_id" => $user->id,
             "distance" => 400,
@@ -53,6 +53,44 @@ class CreateRunTest extends TestCase
         $this->assertEquals(2400,$user->runs()->first()->duration);
     }
 
+    /** @test */
+    public function logged_in_user_can_view_submit_run_through_form_in_ui()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
+        $this->visit('/run/create/form');
+        $this->see("Distance");
+        $this->see("Duration");
+        $this->see("Location");
+        $this->see("Date");
+    }
+
+    /** @test */
+    public function logged_in_user_cannot_view_submit_run_through_form_in_ui()
+    {
+        $this->visit('/run/create/form');
+        $this->dontSee("Distance");
+        $this->dontSee("Duration");
+        $this->dontSee("Location");
+        $this->dontSee("Date");
+    }
+
+
+    /** @test */
+    public function user_can_submit_run_through_form_in_ui()
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user)
+            ->visit("/run/create/form")
+            ->type(5000, "distance")
+            ->select(1, "distance_units_id")
+            ->type(1000, "duration")
+            ->type("Jersey City", "location")
+            ->type("2017-01-2016 12:00:00", "date")
+            ->press("Submit");
+        $this->assertGreaterThan(0,$user->runs()->count());
+    }
+
 
     private function createRun($params)
     {
@@ -66,41 +104,6 @@ class CreateRunTest extends TestCase
     }
 
 
-    /** @test */
-    public function user_id_is_required_to_create_run()
-    {
-        $user = factory(User::class)->create();
-        $this->createRun([
-            "distance" => 400,
-            "distance_units_id" => 1,
-            "duration" => 2400,
-        ]);
-        $this->assertValidationError("user_id");
-    }
-    /** @test */
-    public function user_id_is_numeric_to_create_run()
-    {
-        $user = factory(User::class)->create();
-        $this->createRun([
-            "user_id" => "ABC",
-            "distance" => 400,
-            "distance_units_id" => 1,
-            "duration" => 2400,
-        ]);
-        $this->assertValidationError("user_id");
-    }
-    /** @test */
-    public function user_id_is_greater_than_zero_to_create_run()
-    {
-        $user = factory(User::class)->create();
-        $this->createRun([
-            "user_id" => 0,
-            "distance" => 400,
-            "distance_units_id" => 1,
-            "duration" => 2400,
-        ]);
-        $this->assertValidationError("user_id");
-    }
     /** @test */
     public function distance_is_required_to_create_run()
     {

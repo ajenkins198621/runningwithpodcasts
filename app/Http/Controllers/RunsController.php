@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\DistanceUnits;
 use App\Runs;
 use App\User;
 
@@ -22,20 +23,24 @@ class RunsController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            "user_id" => ["required","numeric", "min:1"],
             "distance" => ["required","numeric", "min:1"],
             "distance_units_id" => ["required","numeric", "min:1"],
             "duration" => ["required","numeric", "min:1"],
         ]);
 
         $run = Runs::create([
-            "user_id" => request('user_id'),
+            "user_id" => Auth::id(),
             "distance" => request('distance'),
             "distance_units_id" => request('distance_units_id'),
             "duration" => request('duration'),
             "location" => request('location'),
             "date" => request('date')
         ]);
-        return json_encode(['created' => ($run)]);
+        return json_encode(['run' => $run]);
+    }
+
+    public function showForm()
+    {
+        return view('runs.create_individual', ["units" => DistanceUnits::get()]);
     }
 }

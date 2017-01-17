@@ -11,23 +11,16 @@
 |
 */
 
-Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
+Route::get('/home', 'HomeController@index');
 
 Route::get('/profile/{username}', "ProfileController@show");
 
 Route::get('/runs/{id}',"RunsController@show");
 Route::post('/runs/create',"RunsController@store");
+Route::get('/run/create/form',"RunsController@showForm")->middleware('auth');
 
-Route::get('/home', 'HomeController@index');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');

@@ -3,6 +3,7 @@
 use App\Profile;
 
 use App\Runs;
+use App\User;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -30,8 +31,9 @@ class RunTest extends TestCase
     /** @test */
     public function store_function_can_be_posted_to()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $this->json("POST","/runs/create",[
-            "user_id" => 1,
             "distance" => 400,
             "distance_units_id" => 1,
             "duration" => 2400,
